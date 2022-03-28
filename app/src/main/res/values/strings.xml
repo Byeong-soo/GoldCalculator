@@ -1,13 +1,15 @@
 <resources>
 
-    <string name="app_name">GoldCalculator</string>
+    <string name="app_name">유자네 쥬얼리 계산소</string>
     <string name="gold_kind">금 종류</string>
-    <string name="gold_market_condition">금 시세(24k 1돈 기준)</string>
-    <string name="gold_mount">금 중량(단위 g)</string>
+    <string name="gold_market_condition_1">금 시세</string>
+    <string name="gold_market_condition_2">(24k 1돈 기준)</string>
+    <string name="gold_mount_1">금 중량</string>
+    <string name="gold_mount_2">(단위 g)</string>
     <string name="gold_margin">마 진</string>
     <string name="gold_wage">공 임</string>
     <string name="calculate">계산하기</string>
     <string name="reset">초기화</string>
-    <string name="gold_price">계산금액</string>
+    <string name="gold_price">계산금액 : </string>
     <string name="won">원</string>
 </resources>
