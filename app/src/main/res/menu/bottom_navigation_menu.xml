@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/calculator"
+        android:enabled="true"
+        android:icon="@drawable/ic_outline_calculate_48"
+        android:title="@string/calculator"/>
+    <item
+        android:id="@+id/goodsList"
+        android:enabled="true"
+        android:icon="@drawable/ic_outline_list_alt_48"
+        android:title="@string/goodsList"/>
+
+</menu>
