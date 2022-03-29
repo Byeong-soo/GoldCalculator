@@ -1,6 +1,11 @@
 <resources>
-
     <string name="app_name">유자네 쥬얼리 계산소</string>
+
+<!--네비게이션 이름-->
+    <string name="calculator">계산기</string>
+    <string name="goodsList">물품리스트</string>
+
+<!--계산기 스트링-->
     <string name="gold_kind">금 종류</string>
     <string name="gold_market_condition_1">금 시세</string>
     <string name="gold_market_condition_2">(24k 1돈 기준)</string>
