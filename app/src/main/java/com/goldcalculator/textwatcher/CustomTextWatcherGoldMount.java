@@ -1,4 +1,4 @@
-package com.goldcalculator;
+package com.goldcalculator.textwatcher;
 
 import android.text.Editable;
 import android.text.Selection;
@@ -10,11 +10,11 @@ import android.widget.EditText;
 import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 
-public class CustomTextWatcher implements TextWatcher {
+public class CustomTextWatcherGoldMount implements TextWatcher {
 
     private EditText editText;
 
-    CustomTextWatcher(EditText editText) {
+    public CustomTextWatcherGoldMount(EditText editText) {
         this.editText = editText;
     }
 
