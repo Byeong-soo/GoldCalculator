@@ -1,8 +1,12 @@
 package com.goldcalculator;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +22,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.goldcalculator.history.HistoryFeedReaderDBHelper;
 import com.goldcalculator.textwatcher.CustomTextWatcherGoldMount;
 import com.goldcalculator.textwatcher.CustomTextWatcherMoney;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 
 public class Calculator extends Fragment {
 
@@ -74,6 +80,14 @@ public class Calculator extends Fragment {
         reset = calculatorView.findViewById(R.id.reset);
         calculatedPrice = calculatorView.findViewById(R.id.calculatedPrice);
         calculatedPriceLayout = calculatorView.findViewById(R.id.calculatedPriceLayout);
+
+
+        // db
+
+        HistoryFeedReaderDBHelper DBHelper;
+        SQLiteDatabase db;
+        DBHelper = new HistoryFeedReaderDBHelper(activity.getApplicationContext(),"history.db",null,1);
+        db = DBHelper.getWritableDatabase();
 
 
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -130,21 +144,23 @@ public class Calculator extends Fragment {
             String strGoldMargin = goldMargin.getEditText().getText().toString();
             String strGoldWage = goldWage.getEditText().getText().toString();
 
+            Double doubleGoldMount;
+            int intGoldMarketCondition, intGoldMargin, intGoldWage;
 
-            Double doubleGoldMount, doubleGoldMarketCondition, doubleGoldMargin, doubleGoldWage;
-
-
-            doubleGoldMount = strToIntAndCheckNull(strGoldMount, goldMount, "중량");
+            doubleGoldMount = strToDoubleAndCheckNull(strGoldMount, goldMount, "중량");
             if (doubleGoldMount == -1) return;
-            doubleGoldMarketCondition = strToIntAndCheckNull(strGoldMarketCondition, goldMarketCondition, "시세");
-            if (doubleGoldMarketCondition == -1) return;
-            doubleGoldMargin = strToIntAndCheckNull(strGoldMargin, goldMargin, "마진");
-            if (doubleGoldMargin == -1) return;
-            doubleGoldWage = strToIntAndCheckNull(strGoldWage, goldWage, "공임");
-            if (doubleGoldWage == -1) return;
+
+            intGoldMarketCondition = strToIntAndCheckNull(strGoldMarketCondition, goldMarketCondition, "시세");
+            if (intGoldMarketCondition == -1) return;
+
+            intGoldMargin =  strToIntAndCheckNull(strGoldMargin, goldMargin, "마진");
+            if (intGoldMargin == -1) return;
+
+            intGoldWage = strToIntAndCheckNull(strGoldWage, goldWage, "공임");
+            if (intGoldWage == -1) return;
 
 
-            Double doubleCalculatedPrice = goldRate * doubleGoldMount * (doubleGoldMarketCondition / 3.75) + doubleGoldMargin + doubleGoldWage;
+            Double doubleCalculatedPrice = goldRate * doubleGoldMount * (intGoldMarketCondition / 3.75) +intGoldMargin + intGoldWage;
             int ceilPrice = (int) Math.ceil(doubleCalculatedPrice);
             DecimalFormat df = new DecimalFormat("###,###");
 
@@ -157,8 +173,26 @@ public class Calculator extends Fragment {
 
             calculatedPriceLayout.setVisibility(View.VISIBLE);
 
+//            히스토리 작성
+
+            Date today = new Date();
+
+            ContentValues values = new ContentValues();
+            values.put("goldMarketCondition",intGoldMarketCondition);
+            values.put("goldKind",goldKind);
+            values.put("goldMount",doubleGoldMount);
+            values.put("goldWage",intGoldWage);
+            values.put("goldMargin",intGoldMargin);
+            values.put("goldTotalPrice",ceilPrice);
+            values.put("datetime",today.toString());
+            db.insert("history",null,values);
+
+
+
         });
 
+
+//        리셋 버튼 클릭시 리셋
         reset.setOnClickListener(view -> {
             goldMount.getEditText().getText().clear();
             goldMargin.getEditText().getText().clear();
@@ -166,9 +200,27 @@ public class Calculator extends Fragment {
             calculatedPriceLayout.setVisibility(View.INVISIBLE);
         });
 
+
+
+
+
+
+    } //onActivityCreated
+
+    public int strToIntAndCheckNull(String str, TextInputLayout textInputLayout, String message) {
+
+        if (TextUtils.isEmpty(str)) {
+            textInputLayout.requestFocus();
+            Toast.makeText(activity.getApplicationContext(), message + "을(를) 입력해주세요!", Toast.LENGTH_SHORT).show();
+            return -1;
+        } else {
+            textInputLayout.clearFocus();
+            str = str.replaceAll(",", "");
+            return Integer.parseInt(str);
+        }
     }
 
-    public double strToIntAndCheckNull(String str, TextInputLayout textInputLayout, String message) {
+    public double strToDoubleAndCheckNull(String str, TextInputLayout textInputLayout, String message) {
 
         if (TextUtils.isEmpty(str)) {
             textInputLayout.requestFocus();
@@ -179,7 +231,31 @@ public class Calculator extends Fragment {
             str = str.replaceAll(",", "");
             return Double.parseDouble(str);
         }
+    }
 
+    // db 에서 불러오기
+    public void selectHistory(SQLiteDatabase db) {
+
+        //        불러오기
+        String sqlSelect = "SELECT * FROM history ORDER BY DATETIME ASC LIMIT 4;";
+        Cursor c = db.rawQuery(sqlSelect,null);
+
+        while(c.moveToNext()){
+            Log.d("금시세", c.getString(0));
+            Log.d("금종류", c.getString(1));
+            Log.d("금양", c.getString(2));
+            Log.d("공임", c.getString(3));
+            Log.d("마진", c.getString(4));
+            Log.d("가격", c.getString(5));
+
+
+
+
+        }
 
     }
+
+
+
+
 }
