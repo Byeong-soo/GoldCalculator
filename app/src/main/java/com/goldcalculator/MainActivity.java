@@ -1,8 +1,11 @@
 package com.goldcalculator;
 
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.goldcalculator.history.HistoryFeedReaderDBHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,13 +25,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentGoodsList = new GoodsList();
 
         bottomNV = findViewById(R.id.bottom_navigation);
+        getSupportFragmentManager().beginTransaction().replace(R.id.menuContainer, fragmentCalculator).commit();
 
         bottomNV.setOnItemSelectedListener(item -> {
 
             if (item.getItemId() == R.id.calculator) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.menuContainer, fragmentCalculator).commit();
-//                calculatorLayout.setVisibility(View.VISIBLE);
-//                goodsListLayout.setVisibility(View.INVISIBLE);
             }
             if (item.getItemId() == R.id.goodsList) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.menuContainer, fragmentGoodsList).commit();
@@ -36,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        //History DB
+        HistoryFeedReaderDBHelper DBHelper;
+        SQLiteDatabase db;
+        DBHelper = new HistoryFeedReaderDBHelper(MainActivity.this,"history.db",null,1);
+        db = DBHelper.getWritableDatabase();
+        DBHelper.onCreate(db);
 
     }
 
