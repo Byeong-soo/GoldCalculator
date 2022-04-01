@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Calculator extends Fragment {
@@ -40,7 +43,7 @@ public class Calculator extends Fragment {
     private TextInputLayout goldMount, goldMarketCondition, goldMargin, goldWage;
     private Button calculate, reset, gold14kButton, gold18kButton, gold24kButton;
     private TextView calculatedPrice;
-    private LinearLayout calculatedPriceLayout;
+    private LinearLayout calculatedPriceLayout,calculateHistory;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -80,6 +83,9 @@ public class Calculator extends Fragment {
         reset = calculatorView.findViewById(R.id.reset);
         calculatedPrice = calculatorView.findViewById(R.id.calculatedPrice);
         calculatedPriceLayout = calculatorView.findViewById(R.id.calculatedPriceLayout);
+
+        // 히스토리
+        calculateHistory = calculatorView.findViewById(R.id.calculateHistory);
 
 
         // db
@@ -187,7 +193,7 @@ public class Calculator extends Fragment {
             values.put("datetime",today.toString());
             db.insert("history",null,values);
 
-
+            selectHistory(db);
 
         });
 
@@ -237,21 +243,55 @@ public class Calculator extends Fragment {
     public void selectHistory(SQLiteDatabase db) {
 
         //        불러오기
-        String sqlSelect = "SELECT * FROM history ORDER BY DATETIME ASC LIMIT 4;";
+        String sqlSelect = "SELECT goldMarketCondition,goldKind,goldMount,goldWage,goldMargin,goldTotalPrice" +
+                " FROM history ORDER BY DATETIME DESC LIMIT 4;";
         Cursor c = db.rawQuery(sqlSelect,null);
 
-        while(c.moveToNext()){
-            Log.d("금시세", c.getString(0));
-            Log.d("금종류", c.getString(1));
-            Log.d("금양", c.getString(2));
-            Log.d("공임", c.getString(3));
-            Log.d("마진", c.getString(4));
-            Log.d("가격", c.getString(5));
+
+        LinearLayout.LayoutParams tableLP = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams textViewLP = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT,1f);
+
+        TableLayout tableLayout = new TableLayout(activity);
+
+        int cursorCount = c.getCount();
+        int textViewCount = 6*cursorCount;
+
+        TableRow[] tableRow = new TableRow[c.getCount()];
+        Button[] button = new Button[cursorCount];
+
+        TextView[] textView = new TextView[textViewCount];
 
 
-
-
+        for(int i=0;i<textViewCount;i++){
+            textView[i] = new TextView(activity);
         }
+
+        for(int i=0;i<c.getCount();i++){
+            tableRow[i] = new TableRow(activity);
+            button[i] = new Button(activity);
+        }
+
+
+        Log.d("cursor 크기 : ", String.valueOf(c.getCount()));
+
+        if(c.getCount()>0){
+            c.moveToFirst();
+            for(int j = 0; j<c.getCount();j++){
+                int num = 0;
+                for(int i = 0; i<6;i++){
+                    if(j==0)num = i;
+                    if(j>0)num = i + 6*j;
+                    Log.d(i+"번째", c.getString(i));
+                    textView[num].setText(c.getString(i));
+                    tableRow[j].addView(textView[num],textViewLP);
+                }
+                c.moveToNext();
+                tableRow[j].addView(button[j],textViewLP);
+                tableLayout.addView(tableRow[j],tableLP);
+            }
+        }
+
+//        activity.setContentView(tableLayout,tableLP);
 
     }
 
