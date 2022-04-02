@@ -42,8 +42,8 @@ public class Calculator extends Fragment {
     private MaterialButtonToggleGroup goldKind;
     private TextInputLayout goldMount, goldMarketCondition, goldMargin, goldWage;
     private Button calculate, reset, gold14kButton, gold18kButton, gold24kButton;
-    private TextView calculatedPrice;
-    private LinearLayout calculatedPriceLayout,calculateHistory;
+    private TextView calculatedPrice,storePrice;
+    private LinearLayout calculatedPriceLayout,storePriceLayout,calculateHistory;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -82,10 +82,12 @@ public class Calculator extends Fragment {
         calculate = calculatorView.findViewById(R.id.calculate);
         reset = calculatorView.findViewById(R.id.reset);
         calculatedPrice = calculatorView.findViewById(R.id.calculatedPrice);
+        storePrice = calculatorView.findViewById(R.id.storePrice);
         calculatedPriceLayout = calculatorView.findViewById(R.id.calculatedPriceLayout);
+        storePriceLayout = calculatorView.findViewById(R.id.storePriceLayout);
 
         // 히스토리
-        calculateHistory = calculatorView.findViewById(R.id.calculateHistory);
+//        calculateHistory = calculatorView.findViewById(R.id.calculateHistory);
 
 
         // db
@@ -170,7 +172,12 @@ public class Calculator extends Fragment {
             int ceilPrice = (int) Math.ceil(doubleCalculatedPrice);
             DecimalFormat df = new DecimalFormat("###,###");
 
+            double doubleStorePrice =  doubleCalculatedPrice *1.14;
+            int ceilStorePrice = (int) Math.ceil(doubleStorePrice);
+
+
             calculatedPrice.setText(df.format(ceilPrice) + " 원");
+            storePrice.setText(df.format(ceilStorePrice)+" 원");
 
             imm.hideSoftInputFromWindow(goldMountEditText.getWindowToken(), 0);
             imm.hideSoftInputFromWindow(goldMarketConditionEditText.getWindowToken(), 0);
@@ -178,6 +185,7 @@ public class Calculator extends Fragment {
             imm.hideSoftInputFromWindow(goldWageEditText.getWindowToken(), 0);
 
             calculatedPriceLayout.setVisibility(View.VISIBLE);
+            storePriceLayout.setVisibility(View.VISIBLE);
 
 //            히스토리 작성
 
@@ -193,7 +201,7 @@ public class Calculator extends Fragment {
             values.put("datetime",today.toString());
             db.insert("history",null,values);
 
-            selectHistory(db);
+//            selectHistory(db);
 
         });
 
@@ -204,6 +212,7 @@ public class Calculator extends Fragment {
             goldMargin.getEditText().getText().clear();
             goldWage.getEditText().getText().clear();
             calculatedPriceLayout.setVisibility(View.INVISIBLE);
+            storePriceLayout.setVisibility(View.INVISIBLE);
         });
 
 

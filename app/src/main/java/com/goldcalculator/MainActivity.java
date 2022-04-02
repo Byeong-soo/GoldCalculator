@@ -38,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        //History DB
-        HistoryFeedReaderDBHelper DBHelper;
-        SQLiteDatabase db;
-        DBHelper = new HistoryFeedReaderDBHelper(MainActivity.this,"history.db",null,1);
-        db = DBHelper.getWritableDatabase();
-        DBHelper.onCreate(db);
+//        //History DB
+//        HistoryFeedReaderDBHelper DBHelper;
+//        SQLiteDatabase db;
+//        DBHelper = new HistoryFeedReaderDBHelper(MainActivity.this,"history.db",null,1);
+//        db = DBHelper.getWritableDatabase();
+//        DBHelper.onCreate(db);
 
     }
 

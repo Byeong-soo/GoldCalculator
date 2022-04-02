@@ -18,6 +18,7 @@
     <string name="calculate">계산하기</string>
     <string name="reset">초기화</string>
     <string name="gold_price">계산금액 : </string>
+    <string name="gold_price_add_tax">스토어팜 판매가 : </string>
     <string name="won">원</string>
     <string name="save">저장</string>
 </resources>

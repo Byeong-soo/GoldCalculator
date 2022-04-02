@@ -266,7 +266,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:layout_marginBottom="40dp"
             android:visibility="invisible">
 
             <TextView
@@ -285,96 +284,135 @@
 
         </LinearLayout>
 
-
-
         <LinearLayout
+            android:id="@+id/storePriceLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="40dp"
+            android:visibility="invisible">
 
-            <RelativeLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/gold_price_add_tax"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/storePrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginBottom="20dp">
-
-                <TextView
-                    android:id="@+id/tvText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="history" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_toStartOf="@id/tvText"
-                    android:background="@color/purple_700" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="16dp"
-                    android:layout_toEndOf="@id/tvText"
-                    android:background="@color/purple_700"
-                    />
-
-            </RelativeLayout>
-
-
-            <TableLayout
-                android:id="@+id/calculateHistory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:text="@string/gold_market_condition_1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:text="@string/gold_mount_1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:text="@string/gold_wage"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:text="@string/gold_margin"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_weight="1" />
-
-                </TableRow>
-
-            </TableLayout>
-
-
-
+                android:text="0원"
+                android:textSize="20sp" />
 
         </LinearLayout>
+
+
+<!--히스토리 부분-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="100dp"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginBottom="20dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:text="history" />-->
+
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_toStartOf="@id/tvText"-->
+<!--                    android:background="@color/purple_700" />-->
+
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:layout_toEndOf="@id/tvText"-->
+<!--                    android:background="@color/purple_700"-->
+<!--                    />-->
+
+<!--            </RelativeLayout>-->
+
+<!--히스토리 표-->
+<!--            <LinearLayout-->
+<!--                android:id="@+id/calculateHistory"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!---->
+<!--                <TableLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
+                    <!--                <TableRow-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content">-->
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/gold_market_condition_1"/>-->
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/gold_mount_1"/>-->
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/gold_wage"/>-->
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/gold_margin"/>-->
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/calculatePrice"/>-->
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:layout_weight="1" />-->
+                    <!--                </TableRow>-->
+
+<!--                </TableLayout>-->
+
+<!--            </LinearLayout>-->
+
+
+
+
+
+<!--        </LinearLayout>-->
 
 
     </LinearLayout>
