@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <!--변경 사항-->
+    <LinearLayout
+        android:id="@+id/checkListLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/changeList" />
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/checkListButtonGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <Button
+                android:id="@+id/checkMarketConditionButton"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gold_market_condition_1" />
+
+            <Button
+                android:id="@+id/checkMountButton"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gold_mount_1"/>
+
+            <Button
+                android:id="@+id/checkWageButton"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gold_wage" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+    </LinearLayout>
+
+<!--판매금액-->
+
+    <LinearLayout
+        android:id="@+id/sale_price_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/sale_price"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/gold_sale_price"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:suffixText="@string/won"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:inputType="number"
+                android:maxLength="25" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <!--금 시세-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="@string/gold_market_condition_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gold_market_condition_2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/gold_market_condition"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="clear_text"
+                app:suffixText="@string/won"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:inputType="number"
+                    android:maxLength="25" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--변경-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/change_gold_market_condition"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="clear_text"
+                app:suffixText="@string/won"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:inputType="number"
+                    android:maxLength="25" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!--금 종류 버튼-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gold_kind" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/gold_kind"
+            app:checkedButton="@id/gold_14k_button"
+            app:selectionRequired="true"
+            app:singleSelection="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/gold_14k_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="14k" />
+
+            <Button
+                android:id="@+id/gold_18k_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="18k" />
+
+            <Button
+                android:id="@+id/gold_24k_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="24k" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+    </LinearLayout>
+
+
+    <!--금 양-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/gold_mount_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/gold_mount_2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/gold_mount"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="clear_text"
+                app:suffixText="g"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:inputType="numberDecimal"
+                    android:maxLength="25" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--변경-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/change_gold_mount"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="clear_text"
+                app:suffixText="g"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:inputType="numberDecimal"
+                    android:maxLength="25" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+    <!--공 임-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/gold_wage" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/gold_wage"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="clear_text"
+                app:suffixText="@string/won"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:inputType="number"
+                    android:maxLength="25" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--변경-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/change_gold_wage"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="clear_text"
+                app:suffixText="@string/won"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:inputType="number"
+                    android:maxLength="25" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+    <!--마 진-->
+    <LinearLayout
+        android:id="@+id/marginLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/gold_margin" />
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/gold_margin"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:suffixText="@string/won"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:inputType="number"
+                android:maxLength="25" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+
+
+
+
+    <!--계산 버튼-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:text="@string/calculate" />
+
+        <Button
+            android:id="@+id/reset"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reset" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/calculatedPriceLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/gold_price"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/calculatedPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0원"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/storePriceLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="40dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/gold_price_add_tax"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/storePrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0원"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/realMarginLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="40dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/realMargin_price"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/realMargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0원"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+    <!--히스토리 부분-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="100dp"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_centerVertical="true"-->
+    <!--                android:layout_marginBottom="20dp">-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/tvText"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerInParent="true"-->
+    <!--                    android:layout_marginLeft="10dp"-->
+    <!--                    android:layout_marginRight="10dp"-->
+    <!--                    android:text="history" />-->
+
+    <!--                <View-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="1dp"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginStart="16dp"-->
+    <!--                    android:layout_toStartOf="@id/tvText"-->
+    <!--                    android:background="@color/purple_700" />-->
+
+    <!--                <View-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="1dp"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginEnd="16dp"-->
+    <!--                    android:layout_toEndOf="@id/tvText"-->
+    <!--                    android:background="@color/purple_700"-->
+    <!--                    />-->
+
+    <!--            </RelativeLayout>-->
+
+    <!--히스토리 표-->
+    <!--            <LinearLayout-->
+    <!--                android:id="@+id/calculateHistory"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content">-->
+    <!---->
+    <!--                <TableLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content">-->
+    <!--                <TableRow-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content">-->
+
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:layout_weight="1"-->
+    <!--                        android:text="@string/gold_market_condition_1"/>-->
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:layout_weight="1"-->
+    <!--                        android:text="@string/gold_mount_1"/>-->
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:layout_weight="1"-->
+    <!--                        android:text="@string/gold_wage"/>-->
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:layout_weight="1"-->
+    <!--                        android:text="@string/gold_margin"/>-->
+
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:layout_weight="1"-->
+    <!--                        android:text="@string/calculatePrice"/>-->
+
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:gravity="center"-->
+    <!--                        android:layout_weight="1" />-->
+    <!--                </TableRow>-->
+
+    <!--                </TableLayout>-->
+
+    <!--            </LinearLayout>-->
+
+
+
+
+
+    <!--        </LinearLayout>-->
+
+
+</LinearLayout>
