@@ -5,6 +5,12 @@
     <string name="calculator">계산기</string>
     <string name="goodsList">물품리스트</string>
 
+<!--계산기 종류-->
+    <string name="calculator_marketcondition">가격 계산기</string>
+    <string name="calculator_realmargin">실 마진 계산기</string>
+    <string name="formula">계산식</string>
+    <string name="addFormula">계산식 추가</string>
+
 <!--계산기 스트링-->
     <string name="gold_kind">금 종류</string>
     <string name="gold_market_condition_1">금 시세</string>
@@ -21,4 +27,10 @@
     <string name="gold_price_add_tax">스토어팜 판매가 : </string>
     <string name="won">원</string>
     <string name="save">저장</string>
+
+<!--실마진 계산기-->
+    <string name="changeList">변경사항(선택)</string>
+
+    <string name="sale_price">판매 가격</string>
+    <string name="realMargin_price">실제 마진 : </string>
 </resources>
