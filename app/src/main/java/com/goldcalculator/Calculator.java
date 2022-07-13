@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,8 +40,11 @@ public class Calculator extends Fragment {
     private MaterialButtonToggleGroup goldKind;
     private TextInputLayout goldMount, goldMarketCondition, goldMargin, goldWage;
     private Button calculate, reset, gold14kButton, gold18kButton, gold24kButton;
-    private TextView calculatedPrice;
+    private TextView calculated14kMount,calculated14kPrice,calculated14kStorePrice,
+            calculated18kMount,calculated18kPrice,calculated18kStorePrice,
+            calculated24kMount,calculated24kPrice,calculated24kStorePrice;
     private LinearLayout calculatedPriceLayout;
+    private TableRow result14k,result18k,result24k;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -78,7 +82,23 @@ public class Calculator extends Fragment {
         gold24kButton = calculatorView.findViewById(R.id.gold_24k_button);
         calculate = calculatorView.findViewById(R.id.calculate);
         reset = calculatorView.findViewById(R.id.reset);
-        calculatedPrice = calculatorView.findViewById(R.id.calculatedPrice);
+        calculated14kPrice = calculatorView.findViewById(R.id.calculated14kPrice);
+        calculated14kStorePrice = calculatorView.findViewById(R.id.calculated14kStorePrice);
+        calculated14kMount = calculatorView.findViewById(R.id.calculated14kMount);
+
+        calculated18kPrice = calculatorView.findViewById(R.id.calculated18kPrice);
+        calculated18kStorePrice = calculatorView.findViewById(R.id.calculated18kStorePrice);
+        calculated18kMount = calculatorView.findViewById(R.id.calculated18kMount);
+
+        calculated24kPrice = calculatorView.findViewById(R.id.calculated24kPrice);
+        calculated24kStorePrice = calculatorView.findViewById(R.id.calculated24kStorePrice);
+        calculated24kMount = calculatorView.findViewById(R.id.calculated24kMount);
+
+        result14k = calculatorView.findViewById(R.id.result14k);
+        result18k = calculatorView.findViewById(R.id.result18k);
+        result24k = calculatorView.findViewById(R.id.result24k);
+
+
         calculatedPriceLayout = calculatorView.findViewById(R.id.calculatedPriceLayout);
 
 
@@ -122,6 +142,7 @@ public class Calculator extends Fragment {
             // 포커스 제거
 
             double goldRate = 0;
+            double convertRate = 0;
             int checkedButtonId = goldKind.getCheckedButtonId();
             Button checkedButton = (Button) calculatorView.findViewById(checkedButtonId);
             String goldKind = checkedButton.getText().toString();
@@ -129,12 +150,15 @@ public class Calculator extends Fragment {
             switch (goldKind) {
                 case "14k":
                     goldRate = 0.6435;
+                    convertRate = 0.825;
                     break;
                 case "18k":
                     goldRate = 0.825;
+                    convertRate = 0.6435;
                     break;
                 case "24k":
                     goldRate = 1;
+                    convertRate = 1;
                     break;
             }
 
@@ -160,34 +184,87 @@ public class Calculator extends Fragment {
             if (intGoldWage == -1) return;
 
 
-            Double doubleCalculatedPrice = goldRate * doubleGoldMount * (intGoldMarketCondition / 3.75) +intGoldMargin + intGoldWage;
-            int ceilPrice = (int) Math.ceil(doubleCalculatedPrice);
-            DecimalFormat df = new DecimalFormat("###,###");
+                double doubleConvertMount;
 
-            calculatedPrice.setText(df.format(ceilPrice) + " 원");
+                if(goldKind.equals("14k")){
+                    doubleConvertMount = (double) Math.round(doubleGoldMount * 1.15 * 100) / 100;
+                }else{
+                    doubleConvertMount = (double) Math.round(doubleGoldMount / 1.15 * 100) / 100;
+                }
 
-            imm.hideSoftInputFromWindow(goldMountEditText.getWindowToken(), 0);
-            imm.hideSoftInputFromWindow(goldMarketConditionEditText.getWindowToken(), 0);
-            imm.hideSoftInputFromWindow(goldMarginEditText.getWindowToken(), 0);
-            imm.hideSoftInputFromWindow(goldWageEditText.getWindowToken(), 0);
+                double doubleCalculatedPrice = goldRate * doubleGoldMount * (intGoldMarketCondition / 3.75) +intGoldMargin + intGoldWage;
+
+                double doubleConvertPrice = convertRate * doubleConvertMount * (intGoldMarketCondition / 3.75) +intGoldMargin + intGoldWage;
+
+
+                int ceilPrice = (int) Math.ceil(doubleCalculatedPrice/1000) * 1000;
+                int ceilConvertPrice = (int) Math.ceil(doubleConvertPrice/1000) * 1000;
+                DecimalFormat df = new DecimalFormat("###,###");
+
+                double doubleCalculatedMount = Math.ceil(doubleGoldMount * 3.75 * 100) / 100;
+                double doubleCalculatedConvertMount = Math.ceil(doubleConvertMount * 3.75 * 100) / 100;
+
+                double doubleCalculatedStorePrice;
+                double doubleConvertedStorePrice;
+
+                if(doubleCalculatedPrice >= 1500000){
+                    doubleCalculatedStorePrice = doubleCalculatedPrice * 1.15;
+                }else{
+                    doubleCalculatedStorePrice = doubleCalculatedPrice * 1.14;
+                }
+
+                if(doubleConvertPrice >= 1500000){
+                    doubleConvertedStorePrice = doubleConvertPrice * 1.15;
+                }else{
+                    doubleConvertedStorePrice = doubleConvertPrice * 1.14;
+                }
+
+                int ceilStorePrice = (int) Math.ceil(doubleCalculatedStorePrice/1000) * 1000;
+                int ceilConvertStorePrice = (int) Math.ceil(doubleConvertedStorePrice/1000) * 1000;
+
+                if(goldKind.equals("14k") || goldKind.equals("18k")){
+                    result14k.setVisibility(View.VISIBLE);
+                    result18k.setVisibility(View.VISIBLE);
+                    result24k.setVisibility(View.GONE);
+
+                    if(goldKind.equals("14k")){
+                        calculated14kMount.setText(doubleGoldMount+ " ("+doubleCalculatedMount+")");
+                        calculated14kPrice.setText(df.format(ceilPrice) + " 원");
+                        calculated14kStorePrice.setText(df.format(ceilStorePrice) +" 원");
+
+                        calculated18kMount.setText(doubleConvertMount+ " ("+doubleCalculatedConvertMount+")");
+                        calculated18kPrice.setText(df.format(ceilConvertPrice) + " 원");
+                        calculated18kStorePrice.setText(df.format(ceilConvertStorePrice) +" 원");
+                    }
+
+                    if(goldKind.equals("18k")){
+                        calculated14kMount.setText(doubleConvertMount+ " ("+doubleCalculatedConvertMount+")");
+                        calculated14kPrice.setText(df.format(ceilConvertPrice) + " 원");
+                        calculated14kStorePrice.setText(df.format(ceilConvertStorePrice) +" 원");
+
+                        calculated18kMount.setText(doubleGoldMount+ " ("+doubleCalculatedMount+")");
+                        calculated18kPrice.setText(df.format(ceilPrice) + " 원");
+                        calculated18kStorePrice.setText(df.format(ceilStorePrice) +" 원");
+                    }
+
+                }
+
+                if(goldKind.equals("24k")){
+                    result14k.setVisibility(View.GONE);
+                    result18k.setVisibility(View.GONE);
+                    result24k.setVisibility(View.VISIBLE);
+                    calculated24kMount.setText(doubleGoldMount+ " ("+doubleCalculatedMount+")");
+                    calculated24kPrice.setText(df.format(ceilPrice) + " 원");
+                    calculated24kStorePrice.setText(df.format(ceilStorePrice) +" 원");
+                }
+
+
+//            imm.hideSoftInputFromWindow(goldMountEditText.getWindowToken(), 0);
+//            imm.hideSoftInputFromWindow(goldMarketConditionEditText.getWindowToken(), 0);
+//            imm.hideSoftInputFromWindow(goldMarginEditText.getWindowToken(), 0);
+//            imm.hideSoftInputFromWindow(goldWageEditText.getWindowToken(), 0);
 
             calculatedPriceLayout.setVisibility(View.VISIBLE);
-
-//            히스토리 작성
-
-            Date today = new Date();
-
-            ContentValues values = new ContentValues();
-            values.put("goldMarketCondition",intGoldMarketCondition);
-            values.put("goldKind",goldKind);
-            values.put("goldMount",doubleGoldMount);
-            values.put("goldWage",intGoldWage);
-            values.put("goldMargin",intGoldMargin);
-            values.put("goldTotalPrice",ceilPrice);
-            values.put("datetime",today.toString());
-            db.insert("history",null,values);
-
-
 
         });
 

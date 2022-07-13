@@ -3,7 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/layout/activity_main.xml" value="0.36770833333333336" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.137" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/drawable/button_selector.xml" value="0.1305" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/drawable/ic_baseline_add_48.xml" value="0.137" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2035" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/drawable/ic_outline_calculate_48.xml" value="0.137" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/layout/activity_main.xml" value="0.20151133501259447" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/layout/ad.xml" value="0.15307971014492755" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/layout/calculate.xml" value="0.15307971014492755" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/layout/calculator.xml" value="0.33" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/layout/calculator_margin.xml" value="0.29635416666666664" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/layout/calculator_marketcondition.xml" value="0.36770833333333336" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/layout/goods_list.xml" value="0.14893617021276595" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.31296296296296294" />
+        <entry key="..\:/ubs/personal/GoldCalculator/app/src/main/res/menu/formula.xml" value="0.36770833333333336" />
       </map>
     </option>
   </component>
